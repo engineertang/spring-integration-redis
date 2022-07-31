@@ -9,13 +9,13 @@ import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.redis.inbound.RedisQueueMessageDrivenEndpoint;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 
-@Configuration
+/*@Configuration
 @EnableIntegration
-@IntegrationComponentScan("com.springboot")
+@IntegrationComponentScan("com.springboot")*/
 public class IntegrationConfig {
 
-	@Bean
-	public JedisConnectionFactory jedisConnectionFactory() {
+	//@Bean
+	/*public JedisConnectionFactory jedisConnectionFactory() {
 		JedisConnectionFactory factory = new JedisConnectionFactory();
 		return factory;
 	}
@@ -31,5 +31,5 @@ public class IntegrationConfig {
 				jedisConnectionFactory());
 		endPoint.setOutputChannelName("receiverChannel");
 		return endPoint;
-	}
+	}*/
 }
