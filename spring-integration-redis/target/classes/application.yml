@@ -1,7 +1,0 @@
-server:
-  port: 9001
-
-redis:
-  host: redis-17704.c292.ap-southeast-1-1.ec2.cloud.redislabs.com
-  port: 17704
-  pwd: HAbN3HPYC5sk64OO7Xv7rzonYPY8R8TL
