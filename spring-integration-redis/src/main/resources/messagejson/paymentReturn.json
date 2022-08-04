@@ -1,0 +1,60 @@
+{
+    "settlementMethod": "INGA",
+    "instructionId": "oeHn8e8fvFn2z50B",
+    "endToEndId": "end-to-end-id",
+    "transactionId": "transaction-id",
+    "uetr": "77263601-a1fb-455b-a8e6-7fdd27ffa747",
+
+    "clearingChannel": "BOOK",
+    "settlementAmount": 78675.00000,
+    "settlementAmountCurrency": "CHF",
+    "settlementDate": "2022-08-02",
+    "settlementPriority": "NORM",
+    "instructedAmount": 78675.00000,
+    "instructedAmountCurrency": "CHF",
+    "chargeBearer": "SHAR",
+    "instructingAgentBic": "SYCOCHGGXXX",
+    "instructedAgentBic": "UBSWCHZH12A",
+    "intermediaryAgent1Bic": "RBOSGB2LXXX",
+    "debtorName": "Swiss Capital",
+
+    "debtorPostalAddress": {
+            "streetName": "Bahnhofstrasse",
+            "townName": "Zurich",
+            "country": "CH"
+    },
+    "debtorAgentBic": "SYCOCHGGXXX",
+    "creditorAgentBic": "COUTGB22XXX",
+    "creditorAsAgentIndicator": false,
+    "creditorName":"XTE Capital",
+    "creditorPostalAddress": {
+        "streetName": "Broadgate",
+        "townName": "London",
+        "country": "GB"
+    },
+    "version": 0,
+    "amlStatus": "NOT_CHECKED",
+    "lastUpdateUser": "leo",
+    "lastUpdateSysId": "vscode",
+    "additionalData": {
+        "originalChargeBearer": "SHAR"
+    },
+    "originalInstructionId": "instruction-id2222",
+    "originalSettlementAmt": 78675.00000,
+    "originalSettlementCurrency": "CHF",
+    "originalSettlementDate": "2022-07-22",
+    "transactionStatus": "PDNG",
+    "balanceStatus": "UNPOSTED",
+    "type": "RETURN",
+    "outward": true,
+    "clientSysId": "vscode",
+    "clientReqId": "20220802173232SS",
+    "clientUsrId": "leo",
+    "rejectReturned": false,
+    "transactionHandlingStatus": "EDITING",
+    "approvalStatus": "NOT_APPLICABLE",
+    "messageType": "pacs.004.001.09",
+    "masterPayment": true,
+    "previousPaymentId": 2,
+    "credit": false
+}

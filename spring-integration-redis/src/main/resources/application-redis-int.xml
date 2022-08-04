@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-redis="http://www.springframework.org/schema/integration/redis"
+       xsi:schemaLocation="http://www.springframework.org/schema/integration/redis
+  http://www.springframework.org/schema/integration/redis/spring-integration-redis.xsd
+ http://www.springframework.org/schema/integration
+ http://www.springframework.org/schema/integration/spring-integration.xsd
+ http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <int:channel id="errorChannel"/>
+
+    <int:gateway id="paymentRedis" service-interface="com.iaspec.ecph.scbhostsimulator.integrationRedis.RedisChannelGateway" error-channel="errorChannel">
+        <int:method name="enqueueString" request-channel="eventChannel" />
+    </int:gateway>
+    <int:channel id="eventChannel" />
+    <int-redis:queue-outbound-channel-adapter connection-factory="redisConnectionFactory" channel="eventChannel" queue="payment-processor-processPayment-queue" serializer="genericJackson2JsonRedisSerializer" />
+
+
+    <bean id="genericJackson2JsonRedisSerializer" class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer">
+        <constructor-arg name="mapper">
+            <bean class="org.springframework.integration.support.json.JacksonJsonUtils" factory-method="messagingAwareMapper">
+                <constructor-arg>
+                    <array>
+                        <value>com.iaspec</value>
+                        <value>java.time</value>
+                        <value>java.sql</value>
+                    </array>
+                </constructor-arg>
+                <property name="serializationInclusion" value="NON_EMPTY" />
+                <property name="dateFormat">
+                    <bean class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+                </property>
+                <property name="timeZone">
+                    <bean class="java.util.TimeZone" factory-method="getDefault" />
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+</beans>

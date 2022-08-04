@@ -1,0 +1,69 @@
+{
+    "originalMessageId": "MSG20220530190633410",
+    "originalMessageType": "pacs.008.001.08",
+    "originalMessageCreationDatetime": "2022-05-30T19:06:33.411+08:00",
+    "instructionId": "INST20220530190633411",
+    "endToEndId": "ETE20220530190633411",
+    "transactionId": "TX20220530190633411",
+    "uetr": "ec77ed21-85d5-492e-ad11-4a3c143b0875",
+    "transactionStatus": "RJCT",
+    "originatorName": "originatorName",
+    "originatorPostalAddress": {
+        "addressLines": [
+            "Unit 511, 5/F, Lakeside 1, 8 Science Park West Avenue",
+            "Phase II, Hong Kong Science Park",
+            "Shatin, N.T. Hong Kong"
+        ]
+    },
+    "isOriginatorCorporate": true,
+    "originatorBic": "HSBCHKHT778",
+    "originatorLei": "LEI44274410575442860",
+    "originatorBirthDate": "2022-05-30",
+    "originatorProvinceOfBirth": "Provice 976",
+    "originatorCityOfBirth": "City246",
+    "originatorCountryOfBirth": "HK",
+    "originatorId1": "COID-98496108686419330",
+    "originatorId1Type": "COID",
+    "originatorId1TypeInfo": null,
+    "originatorId1Issuer": "originatorId1Issuer",
+    "originatorId2": "CUST-54478124456987576",
+    "originatorId2Type": "CUST",
+    "originatorId2TypeInfo": "Customer Id",
+    "originatorId2Issuer": "originatorId2Issuer",
+    "originatorCountryOfResidence": "HK",
+    "statusReason": "AC01",
+    "additionalInfo1": "Invalid account number",
+    "additionalInfo2": "additionalInfo2",
+    "settlementDate": "2022-05-30",
+    "settlementDatetime": "2022-05-30T19:06:33.411+08:00",
+    "clearingSystemReference": "CSR20220530190633411",
+    "instructingAgentBic": "HSBCHKHT179",
+    "instructingAgentClearingSystem": null,
+    "instructingAgentMemberId": null,
+    "instructingAgentLei": "LEI34284572103260404",
+    "instructingAgentName": "instructingAgentName",
+    "instructingAgentPostalAddress": {
+        "department": "IT",
+        "streetName": "Science Park West Avenue",
+        "buildingNo": "8",
+        "buildingName": "Lakeside 1",
+        "floor": "5",
+        "room": "511",
+        "townName": "Shatin",
+        "countrySubDivision": "NT",
+        "country": "HK"
+    },
+    "instructedAgentBic": null,
+    "instructedAgentClearingSystem": "HKNCC",
+    "instructedAgentMemberId": "264",
+    "instructedAgentLei": "LEI88465832902812530",
+    "instructedAgentName": "instructedAgentName",
+    "instructedAgentPostalAddress": {
+        "addressLines": [
+            "Unit 511, 5/F, Lakeside 1, 8 Science Park West Avenue",
+            "Phase II, Hong Kong Science Park",
+            "Shatin, N.T. Hong Kong"
+        ]
+    },
+    "businessService": "stp.cbprplus.02"
+}

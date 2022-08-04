@@ -1,0 +1,65 @@
+{
+    "settlementAmount": 78675,
+	"settlementAmountCurrency": "CHF",
+	"settlementDate": "2022-08-03",
+	"instructedAmount": 78695,
+	"instructedAmountCurrency": "CHF",
+	"chargeBearer": "SHAR",
+	"isChargeAvailable": true,
+	"charges": [{
+		"amount": 10,
+		"currency": "CHF",
+		"chargeAgentBic": "UBSWCHZH12A"
+	}, {
+		"amount": 10,
+		"currency": "CHF",
+		"chargeAgentBic": "RBOSGB2LXXX"
+	}],
+	"settlementMethod": "INDA",
+	"previousInstructingAgent1Bic": "RBOSGB2LXXX",
+	"instructingAgentBic": "UBSWCHZH12A",
+	"instructedAgentBic": "SYCOCHGGXXX",
+	"debtorName": "XTE Capital",
+	"debtorPostalAddress": {
+		"streetName": "Broadgate",
+		"townName": "London",
+		"country": "GB"
+	},
+	"debtorAcctId": "67251219",
+	"debtorAgentBic": "COUTGB22XXX",
+	"debtorAgentAcctId": "18995310",
+	"creditorAgentBic": "SYCOCHGGXXX",
+	"creditorAgentAcctId": "54373188",
+	"creditorName": "Swiss Capital",
+	"creditorPostalAddress": {
+		"streetName": "Bahnhofstrasse",
+		"townName": "Zurich",
+		"country": "CH"
+	},
+	"creditorAcctId": "76117078",
+	"isRegulatoryReportAvailable": true,
+	"unstructuredRemittanceInfo": "INV2708",
+	"id": 21051,
+	"instructionId": "QT22003171130823",
+	"endToEndId": "E2E04044506271305",
+	"uetr": "a3e48b3d-e0e8-4784-aaa7-cfde3d92bac1",
+	"isCredit": true,
+	"transactionStatus": "PDNG",
+	"balanceStatus": "UNPOSTED",
+	"clearingCode": "000",
+	"type": "CUSTOMER_CREDIT_TRANSFER",
+	"businessService": "swift.cbprplus.02",
+	"isOutward": false,
+	"clientSysId": "SWIFT",
+	"clientReqId": "QT22003171130823",
+	"clientUsrId": "SWIFT",
+	"transactionHandlingStatus": "RECEIVED",
+	"amlStatus": "NOT_CHECKED",
+	"creationDatetime": "2022-08-03T17:11:31.029",
+	"messageId": "MSG20220803171130823",
+	"version": 0,
+	"lastUpdateDatetime": "2022-08-03T17:11:31.029",
+	"additionalData": {
+		"remittanceType": "PAYEE_BANK"
+	}
+}
