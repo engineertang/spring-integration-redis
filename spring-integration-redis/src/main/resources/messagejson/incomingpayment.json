@@ -60,6 +60,8 @@
 	"version": 0,
 	"lastUpdateDatetime": "2022-08-03T17:11:31.029",
 	"additionalData": {
-		"remittanceType": "PAYEE_BANK"
+		"remittanceType": "PAYEE_BANK",
+		"MESSAGE_REFERENCE": "M000202207290636090000000048"
 	}
+
 }

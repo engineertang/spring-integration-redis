@@ -1,4 +1,4 @@
-package com.springboot.controller;
+package com.springboot.service;
 
 public interface RedisQueueService {
 
@@ -7,4 +7,6 @@ public interface RedisQueueService {
    void pushPaymentReturn(String eventType);
 
    void pushPaymentStatusReport(String eventType);
+
+   void pushPaymentCancellation(String eventType);
 }

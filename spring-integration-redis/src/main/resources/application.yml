@@ -1,7 +1,12 @@
 server:
-  port: 9001
+  port: 9003
+
+#redis:
+# host: redis-17704.c292.ap-southeast-1-1.ec2.cloud.redislabs.com
+# port: 17704
+# pwd: HAbN3HPYC5sk64OO7Xv7rzonYPY8R8TL
 
 redis:
-  host: redis-17704.c292.ap-southeast-1-1.ec2.cloud.redislabs.com
-  port: 17704
-  pwd: HAbN3HPYC5sk64OO7Xv7rzonYPY8R8TL
+  host: app4.fps.dev
+  port: 6379
+  pwd:  foobared

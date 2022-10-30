@@ -1,10 +1,11 @@
 package com.springboot.intfc;
 
-import com.springboot.model.PostPublishedEvent;
-import com.springboot.model.Student;
+import com.iaspec.ecph.dto.message.InternalMessage;
+import com.iaspec.ecph.payment.dto.PaymentDTO;
 
 public interface RedisChannelGateway {
-   void enqueue(PostPublishedEvent event);
 
-   void enqueue(Student student);
+   void enqueue(PaymentDTO student);
+
+   void enqueueString(InternalMessage jsonString);
 }
