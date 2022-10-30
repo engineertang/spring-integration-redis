@@ -25,33 +25,23 @@ public class SpringIntegrationRedisApplication {
         return (message, pattern) -> System.out.println(" receive message" + new String(message.getBody()));
     }
 
-    @Bean(name = "publishRedisTemplate")
+    @Bean(name = "redisTemplate")
     RedisTemplate publishRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate rt = new RedisTemplate();
         rt.setConnectionFactory(redisConnectionFactory);
         return rt;
     }
 
-    @Bean(name = "subscribeRedisTemplate")
-    RedisTemplate subscribeRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate rt = new RedisTemplate();
-        rt.setConnectionFactory(redisConnectionFactory);
-        return rt;
-    }
 
-/*    @Bean
-    ApplicationRunner pubSub(RedisTemplate<String, String> rt) {
-        ApplicationRunner titledRunner = (args -> rt.convertAndSend(topic, "Hello world"));
-        return titledRunner;
-    }*/
+
 
     @Bean(name = "listenerContainer")
-    RedisMessageListenerContainer listenerContainer(RedisConnectionFactory redisConnectionFactory, MessageListener switchListener) {
+    RedisMessageListenerContainer listenerContainer(RedisConnectionFactory subscribeRedisConnectionFactory, MessageListener myListener) {
         System.out.printf("subscribe topic");
-
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-        container.setConnectionFactory(redisConnectionFactory);
-        container.addMessageListener(switchListener, new PatternTopic(topic));
+        container.addMessageListener(myListener, new PatternTopic(topic));
+        container.setConnectionFactory(subscribeRedisConnectionFactory);
+
         return container;
     }
 

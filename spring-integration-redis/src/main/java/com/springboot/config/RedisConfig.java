@@ -28,7 +28,18 @@ public class RedisConfig {
     }
 
     @Bean(name = "redisConnectionFactory")
-    public RedisConnectionFactory redisConnectionFactory(JedisPoolConfig poolConfig) {
+    public RedisConnectionFactory publishRedisConnectionFactory(JedisPoolConfig poolConfig) {
+        final JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
+        connectionFactory.setHostName(redisHost);
+        connectionFactory.setPort(redisPort);
+        connectionFactory.setPassword(password);
+        connectionFactory.setPoolConfig(poolConfig);
+        connectionFactory.setUsePool(true);
+        return connectionFactory;
+    }
+
+    @Bean(name = "subscribeRedisConnectionFactory")
+    public RedisConnectionFactory subscribeRedisConnectionFactory(JedisPoolConfig poolConfig) {
         final JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
         connectionFactory.setHostName(redisHost);
         connectionFactory.setPort(redisPort);

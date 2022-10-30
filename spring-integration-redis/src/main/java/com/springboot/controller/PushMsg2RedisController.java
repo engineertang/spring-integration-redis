@@ -7,6 +7,10 @@ import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
+import org.springframework.integration.redis.inbound.RedisInboundChannelAdapter;
+import org.springframework.integration.redis.inbound.RedisQueueMessageDrivenEndpoint;
+import org.springframework.integration.redis.outbound.RedisQueueOutboundChannelAdapter;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +33,10 @@ public class PushMsg2RedisController {
     RedisMessageListenerContainer listenerContainer;
     @Autowired
     MessageListener myListener;
+
+    @Autowired
+    RedisQueueMessageDrivenEndpoint myQueueAdapter;
+
 
     @PostMapping(path = "/pushmessage" )
     public void sendStudentInformation(@RequestParam String eventType) {
@@ -74,22 +82,28 @@ public class PushMsg2RedisController {
     @GetMapping
     public void subscribe() {
         System.out.println("subscribe topic");
-        listenerContainer.addMessageListener(myListener, new PatternTopic(topic));
-        listenerContainer.start();
-        System.out.println(Boolean.toString(listenerContainer.isListening()));
+        System.out.println( myQueueAdapter.isListening());
+        myQueueAdapter.start();
+        System.out.println( myQueueAdapter.isListening());
+
+/*        listenerContainer.addMessageListener(myListener, new PatternTopic(topic));
+        System.out.println(Boolean.toString(listenerContainer.isListening()));*/
     }
 
     @DeleteMapping
     public void unSubscribe() throws Exception {
         System.out.println("unsubscribe topic");
-        listenerContainer.removeMessageListener(myListener);
-        System.out.println(Boolean.toString(listenerContainer.isListening()));
+        System.out.println( myQueueAdapter.isListening());
+        myQueueAdapter.stop();
+        System.out.println( myQueueAdapter.isListening());
+        //listenerContainer.stop();
+        //System.out.println(Boolean.toString(listenerContainer.isListening()));
     }
 
     @PutMapping
     public void publish() {
         System.out.println("send message to topic");
-        publishRedisTemplate.convertAndSend(topic, "Hello world");
+        publishRedisTemplate.convertAndSend(topic, "{\"clientSysId\":\"SWIFT\",\"clientReqId\":\"MSG20220725114322066\",\"clientUsrId\":\"SWIFT\",\"eventType\":\"PAYMENT_RECEIVE_NEW_MESSAGE\",\"msgType\":\"pacs.008.001.08\",\"businessService\":\"swift.cbprplus.02\",\"data\":\"\"");
     }
 
 }
