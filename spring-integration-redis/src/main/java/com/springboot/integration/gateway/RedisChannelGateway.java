@@ -1,4 +1,4 @@
-package com.springboot.intfc;
+package com.springboot.integration.gateway;
 
 import com.iaspec.ecph.dto.message.InternalMessage;
 import com.iaspec.ecph.payment.dto.PaymentDTO;

@@ -12,7 +12,7 @@ import com.iaspec.ecfps.util.JsonHelper;
 import com.iaspec.ecph.dto.message.InternalMessage;
 import com.iaspec.ecph.payment.dto.FIToFIPaymentStatusReportDTO;
 import com.iaspec.ecph.payment.dto.PaymentDTO;
-import com.springboot.intfc.RedisChannelGateway;
+import com.springboot.integration.gateway.RedisChannelGateway;
 
 @Service
 public class RedisQueueServiceImpl implements RedisQueueService {

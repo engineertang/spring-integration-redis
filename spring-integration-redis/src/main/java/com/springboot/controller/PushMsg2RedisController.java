@@ -4,7 +4,6 @@ import static com.springboot.model.RedisConstant.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.MessageListener;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -19,21 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.service.RedisQueueService;
 
 @RestController
-@RequestMapping("/api/pushmessage")
+@RequestMapping("/api")
 public class PushMsg2RedisController {
 
     @Autowired
     RedisQueueService queueService;
     @Autowired
-    RedisConnectionFactory redisConnectionFactory;
+    RedisTemplate publishRedisTemplate;
     @Autowired
-    RedisTemplate redisTemplate;
+    RedisMessageListenerContainer listenerContainer;
     @Autowired
-    RedisMessageListenerContainer openRegister;
-    @Autowired
-    MessageListener switchListener;
+    MessageListener myListener;
 
-    @PostMapping
+    @PostMapping(path = "/pushmessage" )
     public void sendStudentInformation(@RequestParam String eventType) {
         System.out.printf("push internal message of event type %1$s in redis %n", eventType);
 
@@ -76,23 +73,23 @@ public class PushMsg2RedisController {
 
     @GetMapping
     public void subscribe() {
-        System.out.printf("subscribe topic");
-        openRegister.addMessageListener(switchListener, new PatternTopic(topic));
-        openRegister.start();
-        System.out.printf(Boolean.toString(openRegister.isListening()));
+        System.out.println("subscribe topic");
+        listenerContainer.addMessageListener(myListener, new PatternTopic(topic));
+        listenerContainer.start();
+        System.out.println(Boolean.toString(listenerContainer.isListening()));
     }
 
     @DeleteMapping
     public void unSubscribe() throws Exception {
-        System.out.printf("unsubscribe topic");
-        openRegister.removeMessageListener(switchListener);
-        System.out.printf(Boolean.toString(openRegister.isListening()));
+        System.out.println("unsubscribe topic");
+        listenerContainer.removeMessageListener(myListener);
+        System.out.println(Boolean.toString(listenerContainer.isListening()));
     }
 
     @PutMapping
-    public void pubSub() {
-        System.out.printf("send topic");
-        redisTemplate.convertAndSend(topic, "Hello world");
+    public void publish() {
+        System.out.println("send message to topic");
+        publishRedisTemplate.convertAndSend(topic, "Hello world");
     }
 
 }

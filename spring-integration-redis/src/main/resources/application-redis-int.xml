@@ -31,7 +31,7 @@
 
     <int:channel id="errorChannel"/>
 
-    <int:gateway id="paymentRedis" service-interface="com.springboot.intfc.RedisChannelGateway" error-channel="errorChannel">
+    <int:gateway id="paymentRedis" service-interface="com.springboot.integration.gateway.RedisChannelGateway" error-channel="errorChannel">
         <int:method name="enqueueString" request-channel="eventChannel" />
     </int:gateway>
     <int:channel id="eventChannel" />

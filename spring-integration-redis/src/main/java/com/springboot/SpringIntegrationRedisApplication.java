@@ -20,25 +20,32 @@ public class SpringIntegrationRedisApplication {
         SpringApplication.run(SpringIntegrationRedisApplication.class, args);
     }
 
-    @Bean(name = "switchListener")
+    @Bean(name = "myListener")
     MessageListener listener() {
-        return (message, pattern) -> System.out.printf("receive message" + new String(message.getBody()));
+        return (message, pattern) -> System.out.println(" receive message" + new String(message.getBody()));
     }
 
-    @Bean
-    RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    @Bean(name = "publishRedisTemplate")
+    RedisTemplate publishRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate rt = new RedisTemplate();
         rt.setConnectionFactory(redisConnectionFactory);
         return rt;
     }
 
-    @Bean
+    @Bean(name = "subscribeRedisTemplate")
+    RedisTemplate subscribeRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate rt = new RedisTemplate();
+        rt.setConnectionFactory(redisConnectionFactory);
+        return rt;
+    }
+
+/*    @Bean
     ApplicationRunner pubSub(RedisTemplate<String, String> rt) {
         ApplicationRunner titledRunner = (args -> rt.convertAndSend(topic, "Hello world"));
         return titledRunner;
-    }
+    }*/
 
-    @Bean(name = "openRegister")
+    @Bean(name = "listenerContainer")
     RedisMessageListenerContainer listenerContainer(RedisConnectionFactory redisConnectionFactory, MessageListener switchListener) {
         System.out.printf("subscribe topic");
 
@@ -47,15 +54,5 @@ public class SpringIntegrationRedisApplication {
         container.addMessageListener(switchListener, new PatternTopic(topic));
         return container;
     }
-
-/*	@Bean(name = "closeRegister")
-	RedisMessageListenerContainer closeContainer(RedisConnectionFactory redisConnectionFactory) {
-		System.out.printf("unsubscribe topic");
-
-		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-		container.setConnectionFactory(redisConnectionFactory);
-		container.removeMessageListener(listener, new PatternTopic(topic));
-		return container;
-	}*/
 
 }
