@@ -5,7 +5,7 @@ import com.iaspec.ecph.payment.dto.PaymentDTO;
 
 public interface RedisChannelGateway {
 
-   void enqueue(PaymentDTO student);
+    void enqueue(PaymentDTO student);
 
-   void enqueueString(InternalMessage jsonString);
+    void enqueueString(InternalMessage jsonString);
 }

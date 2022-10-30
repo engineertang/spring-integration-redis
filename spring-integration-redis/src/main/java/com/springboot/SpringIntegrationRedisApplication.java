@@ -16,37 +16,37 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 @SpringBootApplication
 public class SpringIntegrationRedisApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringIntegrationRedisApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringIntegrationRedisApplication.class, args);
+    }
 
-	@Bean(name = "switchListener")
-	MessageListener listener(){
-		return (message, pattern) -> System.out.printf("receive message" + new String(message.getBody()));
-	}
+    @Bean(name = "switchListener")
+    MessageListener listener() {
+        return (message, pattern) -> System.out.printf("receive message" + new String(message.getBody()));
+    }
 
-	@Bean
-	RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-		RedisTemplate rt = new RedisTemplate();
-		rt.setConnectionFactory(redisConnectionFactory);
-		return rt;
-	}
+    @Bean
+    RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate rt = new RedisTemplate();
+        rt.setConnectionFactory(redisConnectionFactory);
+        return rt;
+    }
 
-	@Bean
-	ApplicationRunner pubSub(RedisTemplate<String, String> rt){
-		ApplicationRunner titledRunner = ( args -> rt.convertAndSend(topic, "Hello world"));
-		return titledRunner;
-	}
+    @Bean
+    ApplicationRunner pubSub(RedisTemplate<String, String> rt) {
+        ApplicationRunner titledRunner = (args -> rt.convertAndSend(topic, "Hello world"));
+        return titledRunner;
+    }
 
-	@Bean(name = "openRegister")
-	RedisMessageListenerContainer listenerContainer(RedisConnectionFactory redisConnectionFactory, MessageListener switchListener) {
-		System.out.printf("subscribe topic");
+    @Bean(name = "openRegister")
+    RedisMessageListenerContainer listenerContainer(RedisConnectionFactory redisConnectionFactory, MessageListener switchListener) {
+        System.out.printf("subscribe topic");
 
-		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-		container.setConnectionFactory(redisConnectionFactory);
-		container.addMessageListener(switchListener, new PatternTopic(topic));
-		return container;
-	}
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(redisConnectionFactory);
+        container.addMessageListener(switchListener, new PatternTopic(topic));
+        return container;
+    }
 
 /*	@Bean(name = "closeRegister")
 	RedisMessageListenerContainer closeContainer(RedisConnectionFactory redisConnectionFactory) {

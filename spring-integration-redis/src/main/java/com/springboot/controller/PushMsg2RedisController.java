@@ -2,18 +2,9 @@ package com.springboot.controller;
 
 import static com.springboot.model.RedisConstant.topic;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -26,12 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.service.RedisQueueService;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 @RestController
 @RequestMapping("/api/pushmessage")
-public class PushMsg2RedisController  {
+public class PushMsg2RedisController {
 
     @Autowired
     RedisQueueService queueService;
@@ -88,20 +77,20 @@ public class PushMsg2RedisController  {
     @GetMapping
     public void subscribe() {
         System.out.printf("subscribe topic");
-        openRegister.addMessageListener(switchListener,  new PatternTopic(topic));
+        openRegister.addMessageListener(switchListener, new PatternTopic(topic));
         openRegister.start();
-        System.out.printf(Boolean.toString( openRegister.isListening()));
+        System.out.printf(Boolean.toString(openRegister.isListening()));
     }
 
     @DeleteMapping
     public void unSubscribe() throws Exception {
         System.out.printf("unsubscribe topic");
         openRegister.removeMessageListener(switchListener);
-        System.out.printf(Boolean.toString( openRegister.isListening()));
+        System.out.printf(Boolean.toString(openRegister.isListening()));
     }
 
     @PutMapping
-    public void pubSub(){
+    public void pubSub() {
         System.out.printf("send topic");
         redisTemplate.convertAndSend(topic, "Hello world");
     }
