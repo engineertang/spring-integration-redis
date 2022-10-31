@@ -1,6 +1,6 @@
 package com.springboot.listener;
 
 public interface MyListener {
-    public void onListen();
+    public void onListen(String object);
 
 }

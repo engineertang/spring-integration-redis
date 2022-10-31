@@ -32,16 +32,16 @@
     </bean>
 
 
+    <int:channel id="errorChannel"/>
+
+    <!-- subscriber consumer message -->
     <int-redis:queue-inbound-channel-adapter id="myQueueAdapter" connection-factory="redisConnectionFactory" queue="site-list"
                                              serializer="" channel="eventChannel" />
     <int:channel id="eventChannel" />
     <int:outbound-channel-adapter id="myAdapter" ref="myListenerImpl" method="onListen" channel="eventChannel">
-
     </int:outbound-channel-adapter>
 
-
-    <int:channel id="errorChannel"/>
-
+    <!-- publisher send message-->
     <int:gateway id="paymentRedis" service-interface="com.springboot.integration.gateway.RedisChannelGateway" error-channel="errorChannel">
         <int:method name="enqueueString" request-channel="event222Channel222" />
     </int:gateway>

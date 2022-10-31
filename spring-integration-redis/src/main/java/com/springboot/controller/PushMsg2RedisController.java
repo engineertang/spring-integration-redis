@@ -33,7 +33,6 @@ public class PushMsg2RedisController {
     RedisMessageListenerContainer listenerContainer;
     @Autowired
     MessageListener myListener;
-
     @Autowired
     RedisQueueMessageDrivenEndpoint myQueueAdapter;
 
@@ -80,10 +79,11 @@ public class PushMsg2RedisController {
     }
 
     @GetMapping
-    public void subscribe() {
+    public void subscribe() throws InterruptedException {
         System.out.println("subscribe topic");
         System.out.println( myQueueAdapter.isListening());
         myQueueAdapter.start();
+        Thread.sleep(5_000);
         System.out.println( myQueueAdapter.isListening());
 
 /*        listenerContainer.addMessageListener(myListener, new PatternTopic(topic));
