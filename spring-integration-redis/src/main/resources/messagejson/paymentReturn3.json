@@ -1,0 +1,87 @@
+{
+    "messageId": "MSG20221220145237357",
+    "messageCreationDatetime": "2022-12-20T14:52:37.357+08:00",
+    "swiftOSN": "157357",
+    "swiftnetSessionNo": "0001",
+    "bankReference": "SW221220145237",
+    "settlementMethod": "INDA",
+    "endToEndId": "E2E04044506271305",
+    "uetr": "174c245f-2682-4291-ad67-2a41e530cd27",
+    "originalInstructionId": "C2D0506272708",
+    "originalSettlementAmount": 39980,
+    "originalSettlementAmountCurrency": "USD",
+    "originalSettlementDate": "2020-01-11",
+    "settlementAmount": 39980,
+    "settlementAmountCurrency": "USD",
+    "settlementDate": "2020-01-11",
+    "chargeBearer": "SHAR",
+    "isChargeAvailable": true,
+    "instructingAgentBic": "BAUTUS31XXX",
+    "instructedAgentBic": "FTSBUS33XXX",
+    "isDebtorAsAgent": true,
+    "debtorAsAgentBic": "BAUTUS31XXX",
+    "debtorAgentBic": "FTSBUS33XXX",
+    "intermediaryAgent1Bic": "CHASUS33XXX",
+    "creditorAgentBic": "CHASGB2LXXX",
+    "creditorName": "NOKIA CORPORATION",
+    "creditorPostalAddress": {
+        "streetName": "1510 ARLINGTON BUSINESS PARK",
+        "townName": "THEALE",
+        "country": "GB"
+    },
+    "isCreditorAsAgent": false,
+    "returnReason": "AC07",
+    "originalTransactionReference": {
+        "debtorName": "NOKIA CORPORATION",
+        "debtorPostalAddress": {
+            "streetName": "1510 ARLINGTON BUSINESS PARK",
+            "townName": "THEALE",
+            "country": "GB"
+        },
+        "debtorAcctId": "96459873",
+        "creditorName": "ATnT",
+        "creditorPostalAddress": {
+            "streetName": "208 ARAKD S",
+            "townName": "DALLAS",
+            "country": "US"
+        },
+        "creditorAcctId": "80869728"
+    },
+    "sourceChannel": "SWIFT",
+    "businessService": "swift.cbprplus.02",
+    "additionalData": {
+        "businessService": "swift.cbprplus.02",
+        "messageKey": "SW221220145237",
+        "messageLength": 5147,
+        "messageSessionNumber": "0001",
+        "messageDefinitionIdentifier": "pacs.004.001.09",
+        "messageType": "pacs.004.001.09",
+        "receivedTime": "14:52:37",
+        "uetr": "3db7eb97-63d0-477b-a9d2-2a090786cbd5",
+        "sysPostedDate": "2022-12-20",
+        "swiftOSN": "157357",
+        "RelatedBusinessApplicationHeader": {
+            "Fr": {
+                "FIId": {
+                    "FinInstnId": {
+                        "BICFI": "FTSBUS33XXX"
+                    }
+                }
+            },
+            "To": {
+                "FIId": {
+                    "FinInstnId": {
+                        "BICFI": "BAUTUS31XXX"
+                    }
+                }
+            },
+            "BizMsgIdr": "C2D0506272708",
+            "MsgDefIdr": "pacs.008.001.08",
+            "BizSvc": "swift.cbprplus.02",
+            "CreDt": "2020-01-12T01:50:41.960+08:00"
+        },
+        "messageChannel": "SWIFT",
+        "receivedDate": "2022-12-20"
+    },
+    "custom3": "2022-12-20"
+}
