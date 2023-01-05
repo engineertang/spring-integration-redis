@@ -2,17 +2,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:int="http://www.springframework.org/schema/integration"
        xmlns:int-redis="http://www.springframework.org/schema/integration/redis"
-       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/integration/redis
   http://www.springframework.org/schema/integration/redis/spring-integration-redis.xsd
  http://www.springframework.org/schema/integration
  http://www.springframework.org/schema/integration/spring-integration.xsd
- http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+
  http://www.springframework.org/schema/beans
  http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="genericJackson2JsonRedisSerializer" class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer">
+    <bean id="genericJackson2JsonRedisSerializer"
+          class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer">
         <constructor-arg name="mapper">
-            <bean class="org.springframework.integration.support.json.JacksonJsonUtils" factory-method="messagingAwareMapper">
+            <bean class="org.springframework.integration.support.json.JacksonJsonUtils"
+                  factory-method="messagingAwareMapper">
                 <constructor-arg>
                     <array>
                         <value>com.iaspec</value>
@@ -20,12 +21,12 @@
                         <value>java.sql</value>
                     </array>
                 </constructor-arg>
-                <property name="serializationInclusion" value="NON_EMPTY" />
+                <property name="serializationInclusion" value="NON_EMPTY"/>
                 <property name="dateFormat">
-                    <bean class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+                    <bean class="com.fasterxml.jackson.databind.util.StdDateFormat"/>
                 </property>
                 <property name="timeZone">
-                    <bean class="java.util.TimeZone" factory-method="getDefault" />
+                    <bean class="java.util.TimeZone" factory-method="getDefault"/>
                 </property>
             </bean>
         </constructor-arg>
@@ -35,21 +36,24 @@
     <int:channel id="errorChannel"/>
 
     <!-- subscriber consumer message -->
-    <int-redis:queue-inbound-channel-adapter id="myQueueAdapter" connection-factory="redisConnectionFactory" queue="site-list"
-                                             serializer="" channel="eventChannel" />
-    <int:channel id="eventChannel" />
-    <int:outbound-channel-adapter id="myAdapter" ref="myListenerImpl" method="onListen" channel="eventChannel">
-    </int:outbound-channel-adapter>
+    <int-redis:queue-inbound-channel-adapter id="myQueueAdapter" connection-factory="redisConnectionFactory"
+                                             queue="site-list"
+                                             serializer="" channel="eventChannel2"/>
+    <int:channel id="eventChannel2"/>
+    <int:outbound-channel-adapter id="myAdapter" ref="myListenerImpl" method="onListen" channel="eventChannel2"/>
+
 
     <!-- publisher send message-->
-    <int:gateway id="paymentRedis" service-interface="com.springboot.integration.gateway.RedisChannelGateway" error-channel="errorChannel">
-        <int:method name="enqueueString" request-channel="event222Channel222" />
+    <int:channel id="eventChannel"/>
+    <int:gateway id="paymentRedis" service-interface="com.springboot.integration.gateway.RedisChannelGateway"
+                 error-channel="errorChannel">
+        <int:method name="enqueueString" request-channel="eventChannel"/>
     </int:gateway>
 
-    <!--<int-redis:queue-outbound-channel-adapter connection-factory="redisConnectionFactory" channel="eventChannel"
-                                              queue="payment-processor-processPayment-queue" serializer="genericJackson2JsonRedisSerializer" />
-
--->
+    <int-redis:queue-outbound-channel-adapter connection-factory="redisConnectionFactory"
+                                              channel="eventChannel"
+                                              queue="payment-processor-processPayment-queue-donald"
+                                              serializer="genericJackson2JsonRedisSerializer"/>
 
 
 </beans>

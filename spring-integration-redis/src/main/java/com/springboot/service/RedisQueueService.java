@@ -9,4 +9,6 @@ public interface RedisQueueService {
     void pushPaymentStatusReport(String eventType);
 
     void pushPaymentCancellation(String eventType);
+
+    void pushMTInvestigation(String eventType);
 }
