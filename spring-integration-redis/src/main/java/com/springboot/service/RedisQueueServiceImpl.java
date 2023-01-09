@@ -13,6 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.iaspec.ecfps.util.JsonHelper;
+import com.iaspec.ecph.dto.Validatable;
 import com.iaspec.ecph.dto.message.InternalMessage;
 import com.iaspec.ecph.investigation.dto.MTInvestigationDTO;
 import com.iaspec.ecph.payment.dto.FIToFIPaymentStatusReportDTO;
@@ -59,10 +60,11 @@ public class RedisQueueServiceImpl implements RedisQueueService {
     // pacs.008 msg
     @Override
     public void pushPayment(String eventType) {
-        String paymentStr = getResourceFile(eventType);
+        String jsonString = getResourceFile(eventType);
 
         try {
-            PaymentDTO payment = JsonHelper.fromJson(paymentStr, PaymentDTO.class);
+            PaymentDTO payment = JsonHelper.fromJson(jsonString, PaymentDTO.class);
+
             // set different test case
             String reqStr = JsonHelper.toJsonIgnoreNulls(payment);
             InternalMessage reqMsg = new InternalMessage();
@@ -137,11 +139,15 @@ public class RedisQueueServiceImpl implements RedisQueueService {
             case "PAYMENT_PROCESSOR_OW_RETURN_SUBMIT_TO_SWIFT":
                 resourceFile = "paymentReturn3.json";
                 break;
+
+            case "SUBMIT_OUTWARD_SWIFT_MT_MESSAGE":
+                resourceFile = "MTn95.json";
+                break;
         }
 
-        String paymentStr = null;
+        String jsonString = null;
         try {
-            paymentStr = FileUtils.readFileToString(new ClassPathResource("messagejson/" + resourceFile).getFile(), StandardCharsets.UTF_8);
+            jsonString = FileUtils.readFileToString(new ClassPathResource("messagejson/" + resourceFile).getFile(), StandardCharsets.UTF_8);
 
             /*Resource resource = new ClassPathResource(resourceFile);
             FileReader fileReader = new FileReader(resource.getFile());
@@ -156,6 +162,6 @@ public class RedisQueueServiceImpl implements RedisQueueService {
             System.out.println(e);
         }
 
-        return paymentStr;
+        return jsonString;
     }
 }

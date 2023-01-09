@@ -23,4 +23,6 @@ class RedisQueueServiceImplTest extends SpringIntegrationRedisApplicationTests {
         // 测试可以根据redis list里新增一条数据paymentDTO.settlementAmount = original - 270
         // redisTemplate
     }
+
+
 }
