@@ -47,12 +47,17 @@
 		<dependency>
 			<groupId>com.iaspec.ecph</groupId>
 			<artifactId>ecph-payment-model</artifactId>
-			<version>2.0.0.20221228</version>
+			<version>2.0.0.20230203</version>
 		</dependency>
 		<dependency>
 			<groupId>com.iaspec.ecph</groupId>
 			<artifactId>ecph-investigation-model</artifactId>
-			<version>2.0.0.20221228</version>
+			<version>2.0.0.20230201</version>
+		</dependency>
+		<dependency>
+			<groupId>com.iaspec.ecph</groupId>
+			<artifactId>ecph-core-generic</artifactId>
+			<version>2.0.0.20230118</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

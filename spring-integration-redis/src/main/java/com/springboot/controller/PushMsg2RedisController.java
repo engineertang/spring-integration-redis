@@ -1,19 +1,12 @@
 package com.springboot.controller;
 
-import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.PAYMENT_PROCESSOR_IW_PAYMENT_RECEIVED;
-import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.PAYMENT_PROCESSOR_OW_PAYMENT_CREATED;
-import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.PAYMENT_PROCESSOR_OW_PAYMENT_SUBMIT_TO_SWIFT;
 import static com.springboot.model.RedisConstant.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
-import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
-import org.springframework.integration.redis.inbound.RedisInboundChannelAdapter;
 import org.springframework.integration.redis.inbound.RedisQueueMessageDrivenEndpoint;
-import org.springframework.integration.redis.outbound.RedisQueueOutboundChannelAdapter;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,15 +52,13 @@ public class PushMsg2RedisController {
             case "PAYMENT_PROCESSOR_OW_RETURN_SUBMIT_TO_SWIFT":
                 queueService.pushPaymentReturn(eventType);
                 break;
-
             case "SUBMIT_OUTWARD_SWIFT_MT_MESSAGE":
                 queueService.pushMTInvestigation(eventType);
                 break;
-
             case "PAYMENT_PROCESSOR_PAYMENT_STATUS_REPORT_CONFIRMED":
             // payment status report pacs.002
-			/*	queueService.pushPaymentStatusReport(eventType);
-				break;*/
+				queueService.pushPaymentStatusReport(eventType);
+				break;
             // instructing agent send cancellation msg camt.056
             case "PAYMENT_PROCESSOR_OUTWARD_CANCELLATION_RECEIVED":
                 break;
