@@ -1,5 +1,7 @@
 package com.springboot.controller;
 
+import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.PAYMENT_PROCESSOR_STATUS_REPORT_CREATED;
+import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.SUBMIT_PAYMENT_STATUS_REPORT;
 import static com.springboot.model.RedisConstant.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,10 +57,12 @@ public class PushMsg2RedisController {
             case "SUBMIT_OUTWARD_SWIFT_MT_MESSAGE":
                 queueService.pushMTInvestigation(eventType);
                 break;
-            case "PAYMENT_PROCESSOR_PAYMENT_STATUS_REPORT_CONFIRMED":
-            // payment status report pacs.002
-				queueService.pushPaymentStatusReport(eventType);
-				break;
+            case PAYMENT_PROCESSOR_STATUS_REPORT_CREATED:
+            case SUBMIT_PAYMENT_STATUS_REPORT:
+                // payment status report pacs.002
+				// queueService.pushPaymentStatusReport(eventType);
+                queueService.pushPayment(eventType);
+                break;
             // instructing agent send cancellation msg camt.056
             case "PAYMENT_PROCESSOR_OUTWARD_CANCELLATION_RECEIVED":
                 break;

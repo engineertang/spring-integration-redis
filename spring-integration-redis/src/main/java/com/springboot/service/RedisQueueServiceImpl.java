@@ -1,7 +1,9 @@
 package com.springboot.service;
 
 import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.PAYMENT_PROCESSOR_IW_PAYMENT_RECEIVED;
-import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.SUBMIT_OUTWARD_SWIFT_MT_MESSAGE;
+import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.PAYMENT_PROCESSOR_STATUS_REPORT_CREATED;
+import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.*;
+import static com.iaspec.ecph.constant.EcphMessageEventTypeConstant.SUBMIT_PAYMENT_STATUS_REPORT;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -126,22 +128,26 @@ public class RedisQueueServiceImpl implements RedisQueueService {
     private String getResourceFile(String eventType) {
         String resourceFile = null;
         switch (eventType) {
-            case "PAYMENT_PROCESSOR_IW_PAYMENT_RECEIVED":
-            case "PAYMENT_PROCESSOR_OW_PAYMENT_CREATED":
-            case "PAYMENT_PROCESSOR_OW_PAYMENT_SUBMIT_TO_SWIFT":
-            case "PAYMENT_PROCESSOR_PAYMENT_STATUS_REPORT_CONFIRMED":
-            case "OUTWARD_PAYMENT_DELETED":
+            case PAYMENT_PROCESSOR_IW_PAYMENT_RECEIVED:
+            case PAYMENT_PROCESSOR_OW_PAYMENT_CREATED:
+            case PAYMENT_PROCESSOR_OW_PAYMENT_SUBMIT_TO_SWIFT:
+            case OUTWARD_PAYMENT_DELETED:
                 resourceFile = "incomingpayment.json";
                 break;
 
-            case "PAYMENT_PROCESSOR_IW_PAYMENT_RETURN_RECEIVED":
-            case "PAYMENT_PROCESSOR_OW_RETURN_CREATED":
-            case "PAYMENT_PROCESSOR_OW_RETURN_SUBMIT_TO_SWIFT":
+            case PAYMENT_PROCESSOR_IW_PAYMENT_RETURN_RECEIVED:
+            case PAYMENT_PROCESSOR_OW_RETURN_CREATED:
+            case PAYMENT_PROCESSOR_OW_RETURN_SUBMIT_TO_SWIFT:
                 resourceFile = "paymentReturn3.json";
                 break;
 
-            case "SUBMIT_OUTWARD_SWIFT_MT_MESSAGE":
+            case SUBMIT_OUTWARD_SWIFT_MT_MESSAGE:
                 resourceFile = "MTn95.json";
+                break;
+
+            case PAYMENT_PROCESSOR_STATUS_REPORT_CREATED:
+            case SUBMIT_PAYMENT_STATUS_REPORT:
+                resourceFile = "FIToFIPaymentStatusReportDTO.json";
                 break;
         }
 

@@ -7,6 +7,6 @@ server:
 # pwd: HAbN3HPYC5sk64OO7Xv7rzonYPY8R8TL
 
 redis:
-  host: app1.fps.dev
+  host: app4.fps.dev
   port: 6379
   pwd:  foobared
